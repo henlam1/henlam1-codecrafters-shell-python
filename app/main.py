@@ -7,17 +7,15 @@ def main():
     sys.stdout.flush()
 
     # Wait for user input
-    args = input()
-    args = args.split()
+    args = input().split(" ")
     cmd = args[0]
-    cmd_arg = ' '.join(args[1:])
 
     # Exit command
     if cmd == "exit":
-        exit(cmd_arg)
+        exit(args[1])
     # Echo command
     elif cmd == "echo":
-        print(cmd_arg)
+        print(" ".join(args[1:]))
     # Handle missing commands
     else:
         sys.stdout.write(f"{cmd}: command not found\n")
