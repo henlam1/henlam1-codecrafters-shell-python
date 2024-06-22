@@ -10,6 +10,7 @@ def main():
     args = input().split()
     cmd = args[0]
     cmd_arg = ' '.join(args[1:])
+    print(cmd, cmd_arg)
 
     # Exit command
     if cmd == "exit":
