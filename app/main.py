@@ -7,7 +7,7 @@ def main():
     sys.stdout.flush()
 
     # Wait for user input
-    args = input()
+    args = input().split()
     cmd = args[0]
     cmd_arg = ' '.join(args[1:])
 
