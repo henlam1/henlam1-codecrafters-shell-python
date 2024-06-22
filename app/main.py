@@ -7,14 +7,19 @@ def main():
     sys.stdout.flush()
 
     # Wait for user input
-    command = input()
+    args = input()
+    cmd = args[0]
+    cmd_arg = ' '.join(args[1:])
 
     # Exit command
-    if command == "exit 0":
-        exit(0)
-
+    if cmd == "exit":
+        exit(cmd_arg)
+    # Echo command
+    elif cmd == "echo":
+        print(cmd_arg)
     # Handle missing commands
-    sys.stdout.write(f"{command}: command not found\n")
+    else:
+        sys.stdout.write(f"{cmd}: command not found\n")
 
     # Make shell recursively call itself
     main()
