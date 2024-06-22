@@ -12,6 +12,9 @@ def main():
     # Handle missing commands
     sys.stdout.write(f"{command}: command not found\n")
 
+    # Make shell recursively call itself
+    main()
+
 
 if __name__ == "__main__":
     main()
