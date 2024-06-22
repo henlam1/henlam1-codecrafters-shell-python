@@ -7,10 +7,10 @@ def main():
     sys.stdout.flush()
 
     # Wait for user input
-    args = input().split()
+    args = input()
+    args = args.split()
     cmd = args[0]
     cmd_arg = ' '.join(args[1:])
-    print(cmd, cmd_arg)
 
     # Exit command
     if cmd == "exit":
