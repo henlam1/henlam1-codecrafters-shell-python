@@ -21,7 +21,7 @@ def path_valid(path):
 
 def go_up_one_level(path):
     parts = path.split('/')
-    return ''.join(parts[:-1])
+    return '/'.join(parts[:-1])
 
 def main():
     # Constants
@@ -78,7 +78,6 @@ def main():
                     continue
                 elif part == "..":
                     new_dir = go_up_one_level(new_dir)
-                    print(new_dir)
                 else:
                     new_dir = os.path.join(new_dir, part)
             
