@@ -49,6 +49,7 @@ def main():
             print(f"{cmd_arg}: not found")
     # Handle missing commands
     else:
+        print(f"cmd is {cmd}, cmd_arg is {cmd_arg}, PATH is {PATH}")
         print(f"{cmd}: command not found")
 
     # Make shell recursively call itself
