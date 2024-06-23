@@ -23,6 +23,31 @@ def go_up_one_level(path):
     parts = path.split('/')
     return '/'.join(parts[:-1])
 
+def handle_abs_path(path):
+    if path_valid(path):
+        os.chdir(path)
+    else:
+        print(f"cd: {path}: No such file or directory")
+
+def handle_rel_path(path):
+    new_dir = os.getcwd()
+    # Iterate each part between slashes
+    parts = path.split('/')
+    for part in parts:
+        if part == ".":
+            continue
+        elif part == "..":
+            new_dir = go_up_one_level(new_dir)
+        else:
+            new_dir = os.path.join(new_dir, part)
+    
+    # Check if path is valid
+    if path_valid(new_dir):
+        os.chdir(new_dir)
+
+def handle_home_dir(path):
+    pass
+
 def main():
     # Constants
     COMMANDS = ["exit", "echo", "type", "pwd"]
@@ -65,28 +90,11 @@ def main():
     elif cmd == "cd":
         # Absolute path
         if cmd_arg.startswith('/'):
-            if path_valid(cmd_arg):
-                os.chdir(cmd_arg)
-            else:
-                print(f"cd: {cmd_arg}: No such file or directory")
+            handle_abs_path(cmd_arg)
         elif cmd_arg.startswith('.'):
-            new_dir = os.getcwd()
-            # Iterate each part between slashes
-            parts = cmd_arg.split('/')
-            for part in parts:
-                if part == ".":
-                    continue
-                elif part == "..":
-                    new_dir = go_up_one_level(new_dir)
-                else:
-                    new_dir = os.path.join(new_dir, part)
-            
-            # Check if path is valid
-            if path_valid(new_dir):
-                os.chdir(new_dir)
-
+            handle_rel_path(cmd_arg)
         elif cmd_arg.startswith('~'):
-            pass
+            handle_home_dir(cmd_arg)
     # Run program/Missing commands
     else:
         # Run program
