@@ -47,10 +47,15 @@ def main():
                 print(f"{cmd_arg}: not found")
         else:
             print(f"{cmd_arg}: not found")
-    # Handle missing commands
+    # Run program/Missing commands
     else:
-        print(f"cmd is {cmd}, cmd_arg is {cmd_arg}, PATH is {PATH}")
-        print(f"{cmd}: command not found")
+        # Run program
+        if os.path.isfile(cmd):
+            os.system(args)
+        # Missing commands
+        else:
+            # print(f"cmd is {cmd}, cmd_arg is {cmd_arg}, PATH is {PATH}")
+            print(f"{cmd}: command not found")
 
     # Make shell recursively call itself
     main()
