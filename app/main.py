@@ -30,10 +30,9 @@ def main():
         # Executable files
         elif PATH:
             # Check each path in PATH env
-            dirs = cmd_arg.split(":")
+            dirs = PATH.split(":")
             for dir in dirs:
                 path = os.path.join(dir, cmd_arg)
-                print(path)
                 # Command is found
                 if os.path.isfile(path):
                     print(f"{cmd_arg} is {path}")
