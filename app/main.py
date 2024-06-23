@@ -78,7 +78,7 @@ def main():
                     continue
                 elif part == "..":
                     new_dir = go_up_one_level(new_dir)
-                    # print(new_dir)
+                    print(new_dir)
                 else:
                     new_dir = os.path.join(new_dir, part)
             
