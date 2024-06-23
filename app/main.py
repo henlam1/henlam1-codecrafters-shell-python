@@ -78,11 +78,12 @@ def main():
                     continue
                 elif part == "..":
                     new_dir = go_up_one_level(new_dir)
+                    # print(new_dir)
                 else:
                     new_dir = os.path.join(new_dir, part)
             
             # Check if path is valid
-            if path_valid(cmd_arg):
+            if path_valid(new_dir):
                 os.chdir(new_dir)
 
         elif cmd_arg.startswith('~'):
