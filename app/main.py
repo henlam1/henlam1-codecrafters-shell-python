@@ -13,6 +13,16 @@ def get_file_path(PATH, file_name):
     
     return None
 
+def path_valid(path):
+    if os.path.isfile(path) or os.path.isdir(path):
+        return True
+    
+    return False
+
+def go_up_one_level(path):
+    parts = path.split('/')
+    return ''.join(parts[:-1])
+
 def main():
     # Constants
     COMMANDS = ["exit", "echo", "type", "pwd"]
@@ -55,11 +65,28 @@ def main():
     elif cmd == "cd":
         # Absolute path
         if cmd_arg.startswith('/'):
-            if os.path.isfile(cmd_arg) or os.path.isdir(cmd_arg):
+            if path_valid(cmd_arg):
                 os.chdir(cmd_arg)
             else:
                 print(f"cd: {cmd_arg}: No such file or directory")
-        pass
+        elif cmd_arg.startswith('.'):
+            new_dir = os.getcwd()
+            # Iterate each part between slashes
+            parts = cmd_arg.split('/')
+            for part in parts:
+                if part == ".":
+                    continue
+                elif part == "..":
+                    new_dir = go_up_one_level(new_dir)
+                else:
+                    new_dir = os.path.join(new_dir, part)
+            
+            # Check if path is valid
+            if path_valid(cmd_arg):
+                os.chdir(new_dir)
+
+        elif cmd_arg.startswith('~'):
+            pass
     # Run program/Missing commands
     else:
         # Run program
