@@ -50,7 +50,8 @@ def main():
     # Run program/Missing commands
     else:
         # Run program
-        if os.path.isfile(cmd):
+        file_path = get_file_path(PATH, cmd)
+        if file_path:
             os.system(args)
         # Missing commands
         else:
