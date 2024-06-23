@@ -1,8 +1,12 @@
 import sys
+import os
 
-COMMANDS = ["exit", "echo", "type"]
 
 def main():
+    # Constants
+    COMMANDS = ["exit", "echo", "type"]
+    PATH = os.environ.get("PATH")
+
     # Print shell prompt
     sys.stdout.write("$ ")
     sys.stdout.flush()
@@ -20,8 +24,13 @@ def main():
         print(cmd_arg)
     # Type command
     elif cmd == "type":
+        print(PATH)
         if cmd_arg in COMMANDS:
             print(f"{cmd_arg} is a shell builtin")
+        elif PATH:
+            paths = cmd_arg.split(":")
+            for path in paths:
+                print(path)
         else:
             print(f"{cmd_arg}: not found")
     # Handle missing commands
