@@ -23,7 +23,8 @@ def main():
     sys.stdout.flush()
 
     # Wait for user input
-    args = input().split(" ")
+    user_in = input()
+    args = user_in.split(" ")
     cmd = args[0]
     cmd_arg = ' '.join(args[1:])
 
@@ -52,8 +53,7 @@ def main():
         # Run program
         file_path = get_file_path(PATH, cmd)
         if file_path:
-            print(file_path)
-            os.system(args)
+            os.system(user_in)
         # Missing commands
         else:
             # print(f"cmd is {cmd}, cmd_arg is {cmd_arg}, PATH is {PATH}")
