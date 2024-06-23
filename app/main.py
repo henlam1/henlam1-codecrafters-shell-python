@@ -51,6 +51,15 @@ def main():
     # Pwd command
     elif cmd == "pwd":
         print(os.getcwd())
+    # Cd command
+    elif cmd == "cd":
+        # Absolute path
+        if cmd_arg.startswith('/'):
+            if os.path.isfile(cmd_arg) or os.path.isdir(cmd_arg):
+                os.chdir(cmd_arg)
+            else:
+                print(f"cd: {cmd_arg}: No such file or directory")
+        pass
     # Run program/Missing commands
     else:
         # Run program
