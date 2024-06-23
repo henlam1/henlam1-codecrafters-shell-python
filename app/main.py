@@ -50,7 +50,7 @@ def main():
             print(f"{cmd_arg}: not found")
     # Pwd command
     elif cmd == "pwd":
-        print(os.path.abspath)
+        print(os.getcwd())
     # Run program/Missing commands
     else:
         # Run program
