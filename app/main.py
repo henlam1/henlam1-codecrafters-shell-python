@@ -24,7 +24,6 @@ def main():
         print(cmd_arg)
     # Type command
     elif cmd == "type":
-        print(PATH)
         if cmd_arg in COMMANDS:
             print(f"{cmd_arg} is a shell builtin")
         elif PATH:
