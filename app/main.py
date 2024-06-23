@@ -28,9 +28,13 @@ def main():
         if cmd_arg in COMMANDS:
             print(f"{cmd_arg} is a shell builtin")
         elif PATH:
+            # Check each path in PATH env
             paths = cmd_arg.split(":")
             for path in paths:
-                print(path)
+                # Command is found
+                if os.path.isfile(f"{path}/{cmd_arg}"):
+                    sys.stdout.write(f"{cmd} is {cmd_arg}\n")
+                    break
         else:
             print(f"{cmd_arg}: not found")
     # Handle missing commands
