@@ -2,6 +2,17 @@ import sys
 import os
 
 
+def get_file_path(PATH, file_name):
+    # Check each directory
+    dirs = PATH.split(":")
+    for dir in dirs:
+        path = os.path.join(dir, file_name)
+        # Command is found
+        if os.path.isfile(path):
+            return path
+    
+    return None
+
 def main():
     # Constants
     COMMANDS = ["exit", "echo", "type"]
@@ -29,19 +40,16 @@ def main():
             print(f"{cmd_arg} is a shell builtin")
         # Executable files
         elif PATH:
-            # Check each path in PATH env
-            dirs = PATH.split(":")
-            for dir in dirs:
-                path = os.path.join(dir, cmd_arg)
-                # Command is found
-                if os.path.isfile(path):
-                    print(f"{cmd_arg} is {path}")
-                    break
+            file_path = get_file_path(PATH, cmd_arg)
+            if file_path:
+                print(f"{cmd_arg} is {file_path}")
+            else:
+                print(f"{cmd_arg}: not found")
         else:
             print(f"{cmd_arg}: not found")
     # Handle missing commands
     else:
-        sys.stdout.write(f"{cmd}: command not found\n")
+        print(f"{cmd}: command not found")
 
     # Make shell recursively call itself
     main()
