@@ -15,7 +15,7 @@ def get_file_path(PATH, file_name):
 
 def main():
     # Constants
-    COMMANDS = ["exit", "echo", "type"]
+    COMMANDS = ["exit", "echo", "type", "pwd"]
     PATH = os.environ.get("PATH")
 
     # Print shell prompt
