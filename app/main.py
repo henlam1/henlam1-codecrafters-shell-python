@@ -24,13 +24,16 @@ def main():
         print(cmd_arg)
     # Type command
     elif cmd == "type":
+        # Builtin commands
         if cmd_arg in COMMANDS:
             print(f"{cmd_arg} is a shell builtin")
+        # Executable files
         elif PATH:
             # Check each path in PATH env
             dirs = cmd_arg.split(":")
             for dir in dirs:
                 path = os.path.join(dir, cmd_arg)
+                print(path)
                 # Command is found
                 if os.path.isfile(path):
                     print(f"{cmd_arg} is {path}")
