@@ -1,7 +1,7 @@
 import sys
 import os
 
-# Helper functions
+# Search PATH for file
 def get_file_path(PATH, file_name):
     # Check each directory
     dirs = PATH.split(":")
@@ -13,16 +13,19 @@ def get_file_path(PATH, file_name):
     
     return None
 
+# Check if path is valid
 def path_valid(path):
     if os.path.isfile(path) or os.path.isdir(path):
         return True
     
     return False
 
+# Go up one level in the path
 def go_up_one_level(path):
     parts = path.split('/')
     return '/'.join(parts[:-1])
 
+# Find exec files
 def handle_exec_files(PATH, cmd_arg):
     file_path = get_file_path(PATH, cmd_arg)
     if file_path:
@@ -30,12 +33,14 @@ def handle_exec_files(PATH, cmd_arg):
     else:
         print(f"{cmd_arg}: not found")
 
+# Change dir for absolute paths
 def handle_abs_path(path):
     if path_valid(path):
         os.chdir(path)
     else:
         print(f"cd: {path}: No such file or directory")
 
+# Change dir for relative paths
 def handle_rel_path(path):
     new_dir = os.getcwd()
     # Iterate each part between slashes
