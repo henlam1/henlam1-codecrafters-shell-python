@@ -45,13 +45,11 @@ def handle_rel_path(path):
     if path_valid(new_dir):
         os.chdir(new_dir)
 
-def handle_home_dir(path):
-    pass
-
 def main():
     # Constants
     COMMANDS = ["exit", "echo", "type", "pwd"]
     PATH = os.environ.get("PATH")
+    HOME = os.environ.get("HOME")
 
     # Print shell prompt
     sys.stdout.write("$ ")
@@ -94,7 +92,7 @@ def main():
         elif cmd_arg.startswith('.'):
             handle_rel_path(cmd_arg)
         elif cmd_arg.startswith('~'):
-            handle_home_dir(cmd_arg)
+            os.chdir(HOME)
     # Run program/Missing commands
     else:
         # Run program
