@@ -1,7 +1,7 @@
 import sys
 import os
 
-
+# Helper functions
 def get_file_path(PATH, file_name):
     # Check each directory
     dirs = PATH.split(":")
@@ -22,6 +22,13 @@ def path_valid(path):
 def go_up_one_level(path):
     parts = path.split('/')
     return '/'.join(parts[:-1])
+
+def handle_exec_files(PATH, cmd_arg):
+    file_path = get_file_path(PATH, cmd_arg)
+    if file_path:
+        print(f"{cmd_arg} is {file_path}")
+    else:
+        print(f"{cmd_arg}: not found")
 
 def handle_abs_path(path):
     if path_valid(path):
@@ -74,11 +81,7 @@ def main():
             print(f"{cmd_arg} is a shell builtin")
         # Executable files
         elif PATH:
-            file_path = get_file_path(PATH, cmd_arg)
-            if file_path:
-                print(f"{cmd_arg} is {file_path}")
-            else:
-                print(f"{cmd_arg}: not found")
+            handle_exec_files(PATH, cmd_arg)
         else:
             print(f"{cmd_arg}: not found")
     # Pwd command
